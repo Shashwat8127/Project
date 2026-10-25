@@ -1,0 +1,9 @@
+
+package: api
+
+generate:
+  models: true
+  chi-server: true
+  strict-server: true
+
+output: api/generated.go

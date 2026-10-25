@@ -1,0 +1,198 @@
+openapi: 3.0.3
+
+info:
+  title: GoConvert API
+  description: REST API for file conversion using Golang
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+tags:
+  - name: File Conversion
+    description: File conversion operations
+
+paths:
+  /api/v1/convert/pdf-to-txt:
+    post:
+      tags:
+        - File Conversion
+      summary: Convert PDF to TXT
+      operationId: convertPdfToTxt
+
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: PDF file to convert
+
+      responses:
+        "200":
+          description: Converted text file
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+
+        "400":
+          description: Invalid file or request
+
+        "413":
+          description: File exceeds the permitted size
+
+        "500":
+          description: Conversion failed
+
+  /api/v1/convert/png-to-jpeg:
+    post:
+      tags:
+        - File Conversion
+      summary: Convert PNG to JPEG
+      operationId: convertPngToJpeg
+
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+
+      responses:
+        "200":
+          description: Converted JPEG image
+          content:
+            image/jpeg:
+              schema:
+                type: string
+                format: binary
+
+        "400":
+          description: Invalid PNG file
+
+        "500":
+          description: Conversion failed
+
+  /api/v1/convert/jpeg-to-png:
+    post:
+      tags:
+        - File Conversion
+      summary: Convert JPEG to PNG
+      operationId: convertJpegToPng
+
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+
+      responses:
+        "200":
+          description: Converted PNG image
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+
+        "400":
+          description: Invalid JPEG file
+
+        "500":
+          description: Conversion failed
+
+  /api/v1/convert/docx-to-pdf:
+    post:
+      tags:
+        - File Conversion
+      summary: Convert DOCX to PDF
+      operationId: convertDocxToPdf
+
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+
+      responses:
+        "200":
+          description: Converted PDF document
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+        "400":
+          description: Invalid DOCX file
+
+        "500":
+          description: Conversion failed
+
+  /api/v1/convert/xlsx-to-csv:
+    post:
+      tags:
+        - File Conversion
+      summary: Convert XLSX to CSV
+      operationId: convertXlsxToCsv
+
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+
+      responses:
+        "200":
+          description: Converted CSV file
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+
+        "400":
+          description: Invalid XLSX file
+
+        "500":
+          description: Conversion failed
